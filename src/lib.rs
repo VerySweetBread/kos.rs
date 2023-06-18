@@ -59,6 +59,7 @@ pub fn define_window(start: Dot, width: u32, height: u32, params: WindowParams<'
             start.y * 65536 + height,
             params.color.as_rgb_val()
                 | (RELATIVE_FLAG | (params.title.is_some() as u32) << 4 | params.kind as u32) << 24,
+            0,
             params
                 .title
                 .map(|s| s.as_ptr())
@@ -82,8 +83,8 @@ pub fn display_message(start: Dot, params: WindowTextParams<'_>) {
             start.x * 65536 + start.y,
             params.color.as_rgb_val() | BG_FLAG * params.bg_color.is_some() as u32 | UTF8_FLAG,
             params.text.as_ptr() as u32,
-            0,
             params.text.len() as u32,
+            0,
         );
     }
 }

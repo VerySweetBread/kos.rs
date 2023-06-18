@@ -10,9 +10,9 @@ extern "C" {
     pub fn exit() -> !;
 
     #[link_name = "_define_window"]
-    pub fn define_window(ebx: u32, ecx: u32, edx: u32, edi: u32);
+    pub fn define_window(ebx: u32, ecx: u32, edx: u32, esi: u32, edi: u32);
     #[link_name = "_display_message"]
-    pub fn display_message(ebx: u32, ecx: u32, edx: u32, edi: u32, esi: u32);
+    pub fn display_message(ebx: u32, ecx: u32, edx: u32, esi: u32, edi: u32);
 
     #[link_name = "_wait_event"]
     pub fn wait_event() -> u32;

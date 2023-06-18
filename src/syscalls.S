@@ -27,31 +27,28 @@ _end_window_draw:
 
 _define_window:
     push edi
-    push ebx
+    push esi
     xor eax, eax
-    mov ebx, dword [esp + 0x14]
-    mov ecx, dword [esp + 0x18]
-    mov edx, dword [esp + 0x1c]
-    mov edi, dword [esp + 0x20]
-    mov ebx, 2
+    mov ebx, dword [esp + 0x0c]
+    mov ecx, dword [esp + 0x10]
+    mov edx, dword [esp + 0x14]
+    mov esi, dword [esp + 0x18]
+    mov edi, dword [esp + 0x1c]
     int 0x40
-    pop ebx
+    pop esi
     pop edi
     ret
 
 _display_message:
     push edi
     push esi
-    push ebx
     mov eax, 4
-    mov ebx, dword [esp + 0x14]
-    mov ecx, dword [esp + 0x18]
-    mov edx, dword [esp + 0x1c]
-    mov esi, dword [esp + 0x20]
-    mov edi, dword [esp + 0x24]
-    mov ebx, 2
+    mov ebx, dword [esp + 0x0c]
+    mov ecx, dword [esp + 0x10]
+    mov edx, dword [esp + 0x14]
+    mov esi, dword [esp + 0x18]
+    mov edi, dword [esp + 0x1c]
     int 0x40
-    pop ebx
     pop esi
     pop edi
     ret
