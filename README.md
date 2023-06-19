@@ -1,7 +1,7 @@
 # Hello-world example for KolibriOS
 
 Project uses [cargo-make](https://github.com/sagiegurari/cargo-make) for building steps.
-Also you need a working [NASM](https://nasm.us/).
+Also you need a working [FASM](https://flatassembler.net/download.php).
 
-Once installed building is trivial then: `cargo make --profile production` produces
-a ready-to-use binary at `target/i686-kolibri/release/hw_kolibri`.
+Once installed building is trivial then: `cargo objcopy --release -- -O binary --binary-architecture=i386:x86 rust.kex` produces
+a ready-to-use binary at root.
