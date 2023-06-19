@@ -1,13 +1,13 @@
-BITS 32
+format ELF
 
-section .text
-    global _exit
-    global _start_window_draw
-    global _end_window_draw
-    global _define_window
-    global _display_message
-    global _wait_event
-    global _pressed_key
+section '.text'
+    public _exit
+    public _start_window_draw
+    public _end_window_draw
+    public _define_window
+    public _display_message
+    public _wait_event
+    public _pressed_key
 
 _exit:
     mov eax, -1

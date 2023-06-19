@@ -1,5 +1,19 @@
+use std::{process::Command, env};
+
 fn main() {
     println!("cargo:rerun-if-changed=src/syscalls.S");
-    nasm_rs::compile_library_args("libsyscalls.a", &["src/syscalls.S"], &["-f elf32"])
-        .expect("failed to compile assembly");
+
+    let out_dir = env::var("OUT_DIR").unwrap();
+    
+    Command::new("fasm")
+        .arg("src/syscalls.S")
+        .arg(&format!("{}/libsyscalls.a", out_dir))
+        .status().unwrap();
+    Command::new("ar")
+        .arg("crus")
+        .arg(&format!("{}/libsyscalls.a", out_dir))
+        .arg(&format!("{}/libsyscalls.o", out_dir))
+        .status().unwrap();
+
+    println!("cargo:rustc-link-search={}", out_dir)
 }
