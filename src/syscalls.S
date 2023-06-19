@@ -1,5 +1,7 @@
 format ELF
 
+include "src/func_constants.inc"
+
 section '.text'
     public _exit
     public _start_window_draw
@@ -10,25 +12,25 @@ section '.text'
     public _pressed_key
 
 _exit:
-    mov eax, -1
+    mov eax, SF_TERMINATE_PROCESS
     int 0x40
 
 _start_window_draw:
-    mov eax, 0xc
-    mov ebx, 1
+    mov eax, SF_REDRAW
+    mov ebx, SSF_BEGIN_DRAW
     int 0x40
     ret
 
 _end_window_draw:
-    mov eax, 0xc
-    mov ebx, 2
+    mov eax, SF_REDRAW
+    mov ebx, SSF_END_DRAW
     int 0x40
     ret
 
 _define_window:
     push edi
     push esi
-    xor eax, eax
+    mov eax, SF_CREATE_WINDOW
     mov ebx, dword [esp + 0x0c]
     mov ecx, dword [esp + 0x10]
     mov edx, dword [esp + 0x14]
@@ -42,7 +44,7 @@ _define_window:
 _display_message:
     push edi
     push esi
-    mov eax, 4
+    mov eax, SF_DRAW_TEXT
     mov ebx, dword [esp + 0x0c]
     mov ecx, dword [esp + 0x10]
     mov edx, dword [esp + 0x14]
@@ -54,11 +56,11 @@ _display_message:
     ret
 
 _wait_event:
-    mov eax, 0xa
+    mov eax, SF_WAIT_EVENT
     int 0x40
     ret
 
 _pressed_key:
-    mov eax, 2
+    mov eax, SF_GET_KEY
     int 0x40
     ret

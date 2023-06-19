@@ -1,0 +1,10 @@
+SF_TERMINATE_PROCESS    = -1
+SF_CREATE_WINDOW        = 0 
+SF_PUT_PIXEL            = 1 
+SF_GET_KEY              = 2
+SF_GET_SYS_TIME         = 3
+SF_DRAW_TEXT            = 4
+SF_WAIT_EVENT           = 10
+SF_REDRAW               = 12
+    SSF_BEGIN_DRAW  = 1
+    SSF_END_DRAW    = 2
