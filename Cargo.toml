@@ -1,10 +1,14 @@
 [package]
-name = "hw_kolibri"
+name = "kos"
 version = "0.1.0"
-authors = ["Kitsu <mail@kitsu.me>"]
+authors = ["Kitsu <mail@kitsu.me>", "Sweetbread"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[example]]
+name = "hwa"
+path = "example/hwa.rs"
 
 [profile.release]
 opt-level = "z"
@@ -14,4 +18,3 @@ lto = "thin"
 cstr_core = { version = "0.2.4", default-features = false, features = ["nightly"] }
 
 [build-dependencies]
-nasm-rs = "0.2.2"
