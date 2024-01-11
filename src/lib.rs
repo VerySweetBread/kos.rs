@@ -35,6 +35,11 @@ pub struct Dot {
     pub y: u32,
 }
 
+pub struct Size {
+    pub width: u32,
+    pub height: u32,
+}
+
 #[repr(u32)]
 pub enum WindowKind {
     Fixed = 0,
@@ -50,13 +55,13 @@ pub struct WindowParams<'a> {
     pub title: Option<&'a cstr_core::CStr>,
 }
 
-pub fn define_window(start: Dot, width: u32, height: u32, params: WindowParams<'_>) {
+pub fn define_window(start: Dot, size: Size, params: WindowParams<'_>) {
     const RELATIVE_FLAG: u32 = 0x20;
 
     unsafe {
         sys::define_window(
-            start.x * 65536 + width,
-            start.y * 65536 + height,
+            start.x * 65536 + size.width,
+            start.y * 65536 + size.height,
             params.color.as_rgb_val()
                 | (RELATIVE_FLAG | (params.title.is_some() as u32) << 4 | params.kind as u32) << 24,
             0,
@@ -91,6 +96,14 @@ pub fn display_message(start: Dot, params: WindowTextParams<'_>) {
 
 pub fn exit() -> ! {
     unsafe { sys::exit() }
+}
+
+pub fn start_window_draw() {
+    unsafe { sys::start_window_draw() }
+}
+
+pub fn end_window_draw() {
+    unsafe { sys::end_window_draw() }
 }
 
 #[panic_handler]
