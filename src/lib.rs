@@ -26,7 +26,7 @@ impl Color {
     }
 
     pub fn as_rgb_val(self) -> u32 {
-        (self.0 as u32) << 16 | (self.1 as u32) << 8 | (self.0 as u32)
+        (self.0 as u32) << 16 | (self.1 as u32) << 8 | (self.2 as u32)
     }
 }
 
@@ -60,8 +60,8 @@ pub fn define_window(start: Dot, size: Size, params: WindowParams<'_>) {
 
     unsafe {
         sys::define_window(
-            start.x * 65536 + size.width,
-            start.y * 65536 + size.height,
+            start.x << 16 | size.width,
+            start.y << 16 | size.height,
             params.color.as_rgb_val()
                 | (RELATIVE_FLAG | (params.title.is_some() as u32) << 4 | params.kind as u32) << 24,
             0,
@@ -85,7 +85,7 @@ pub fn display_message(start: Dot, params: WindowTextParams<'_>) {
 
     unsafe {
         sys::display_message(
-            start.x * 65536 + start.y,
+            start.x << 16 | start.y,
             params.color.as_rgb_val() | BG_FLAG * params.bg_color.is_some() as u32 | UTF8_FLAG,
             params.text.as_ptr() as u32,
             params.text.len() as u32,
