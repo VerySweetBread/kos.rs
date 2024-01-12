@@ -42,17 +42,14 @@ _define_window:
     ret
 
 _display_message:
-    push edi
-    push esi
+    push esi edi
     mov eax, SF_DRAW_TEXT
     mov ebx, dword [esp + 0x0c]
     mov ecx, dword [esp + 0x10]
     mov edx, dword [esp + 0x14]
-    mov esi, dword [esp + 0x18]
-    mov edi, dword [esp + 0x1c]
+    mov edi, dword [esp + 0x18]
     int 0x40
-    pop esi
-    pop edi
+    pop edi esi
     ret
 
 _wait_event:
