@@ -18,6 +18,7 @@
     "target-endian": "little",
     "target-pointer-width": "32",
     "vendor": "unknown",
+    "disable-redzone": true,
     "panic-strategy": "abort",
-    "disable-redzone": true
+    "singlethread": true
 }

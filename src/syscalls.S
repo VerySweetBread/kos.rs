@@ -10,6 +10,12 @@ section '.text'
     public _display_message
     public _wait_event
     public _pressed_key
+    public _define_button
+    public _debug_write
+    public _get_button_id
+    public _init_heap
+    public _alloc
+    public _free
 
 _exit:
     mov eax, SF_TERMINATE_PROCESS
@@ -61,3 +67,47 @@ _pressed_key:
     mov eax, SF_GET_KEY
     int 0x40
     ret
+
+_define_button:
+    push esi edi
+    mov eax, SF_DEFINE_BUTTON
+    mov ebx, dword [esp + 4 * 3]
+    mov ecx, dword [esp + 4 * 4]
+    mov edx, dword [esp + 4 * 5]
+    mov esi, dword [esp + 4 * 6]
+    int 0x40
+    pop edi esi
+    ret
+
+_debug_write:
+    mov eax, SF_BOARD
+    mov ebx, SSF_DEBUG_WRITE
+    mov cl , byte  [esp + 4 * 1]
+    int 0x40
+    ret
+
+_get_button_id:
+    mov eax, SF_GET_BUTTON
+    int 0x40
+    ret
+
+_init_heap:
+    mov eax, SF_SYS_MISC
+    mov ebx, SSF_HEAP_INIT
+    int 0x40
+    ret
+
+_alloc:
+    mov eax, SF_SYS_MISC
+    mov ebx, SSF_MEM_ALLOC
+    mov ecx, [esp + 4 * 1]
+    int 0x40
+    ret
+
+_free:
+    mov eax, SF_SYS_MISC
+    mov ebx, SSF_MEM_FREE
+    mov ecx, [esp + 4 * 1]
+    int 0x40
+    ret
+

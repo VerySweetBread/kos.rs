@@ -21,6 +21,6 @@ args = ["build"]
 
 [tasks.objcopy]
 command = "cargo"
-args = ["objcopy", "@@remove-empty(RELEASE_FLAG)", "--", "-Obinary"]
+args = ["objcopy", "@@remove-empty(RELEASE_FLAG)", "--", "-O binary", "--strip-all"]
 dependencies = ["build-1"]
 install_crate = { crate_name = "cargo-binutils", binary = "rust-objcopy", test_arg = ["--help"] }
