@@ -37,11 +37,11 @@ _define_window:
     push edi
     push esi
     mov eax, SF_CREATE_WINDOW
-    mov ebx, dword [esp + 0x0c]
-    mov ecx, dword [esp + 0x10]
-    mov edx, dword [esp + 0x14]
-    mov esi, dword [esp + 0x18]
-    mov edi, dword [esp + 0x1c]
+    mov ebx, dword [esp + 4 * 3]
+    mov ecx, dword [esp + 4 * 4]
+    mov edx, dword [esp + 4 * 5]
+    mov esi, dword [esp + 4 * 6]
+    mov edi, dword [esp + 4 * 7]
     int 0x40
     pop esi
     pop edi
@@ -50,10 +50,10 @@ _define_window:
 _display_message:
     push esi edi
     mov eax, SF_DRAW_TEXT
-    mov ebx, dword [esp + 0x0c]
-    mov ecx, dword [esp + 0x10]
-    mov edx, dword [esp + 0x14]
-    mov edi, dword [esp + 0x18]
+    mov ebx, dword [esp + 4 * 3]
+    mov ecx, dword [esp + 4 * 4]
+    mov edx, dword [esp + 4 * 5]
+    mov edi, dword [esp + 4 * 6]
     int 0x40
     pop edi esi
     ret
