@@ -6,6 +6,7 @@ use cstr_core::{cstr, CStr};
 use kos::{
     graphics::{display_message, Color, Dot, Size},
     input::fetch_key,
+    system::{get_lang, Lang},
     threads::{exit, fetch_event, Event},
     windows::{
         define_button, define_window, end_window_draw, get_button_id, start_window_draw,
@@ -43,11 +44,17 @@ fn draw_window(c: usize) {
         None,
     );
 
+    let btn_str = match get_lang() {
+        Lang::German => format!("Taste gedrückt: {} mal\0", c),
+        Lang::Russian => format!("Кнопка нажата: {} раз\0", c),
+        Lang::French => format!("Button enfoncé : {} fois\0", c),
+        _ => format!("Button pressed: {} times\0", c),
+    };
+
     display_message(
         Dot { x: 10, y: 30 },
         Color::rgb(0, 0, 0),
-        CStr::from_bytes_with_nul(format!("Button pressed: {} times\0", c).as_bytes())
-            .unwrap_or(cstr!("String error")),
+        CStr::from_bytes_with_nul(btn_str.as_bytes()).unwrap_or(cstr!("String error")),
         None,
     );
 

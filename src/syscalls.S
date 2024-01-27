@@ -16,6 +16,7 @@ section '.text'
     public _init_heap
     public _alloc
     public _free
+    public _get_lang
 
 _exit:
     mov eax, SF_TERMINATE_PROCESS
@@ -108,6 +109,12 @@ _free:
     mov eax, SF_SYS_MISC
     mov ebx, SSF_MEM_FREE
     mov ecx, [esp + 4 * 1]
+    int 0x40
+    ret
+
+_get_lang:
+    mov eax, SF_SYSTEM_GET
+    mov ebx, SSF_SYS_LANG
     int 0x40
     ret
 

@@ -36,6 +36,10 @@ extern "C" {
     #[link_name = "_get_button_id"]
     pub fn get_button_id() -> u32;
 
+    // 26.5
+    #[link_name = "_get_lang"]
+    pub fn get_lang() -> u32;
+
     // 63.1
     #[link_name = "_debug_write"]
     pub fn _debug_write(cl: u8);
