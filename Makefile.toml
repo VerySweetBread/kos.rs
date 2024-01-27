@@ -5,22 +5,17 @@ RELEASE_FLAG = "--release"
 alias = "all"
 
 [tasks.all]
-dependencies = ["objcopy"]
+dependencies = ["build"]
 
 [tasks.clean]
 command = "cargo"
 args = ["clean"]
 
-[tasks.build-1]
+[tasks.build]
 command = "cargo"
 args = ["build", "@@remove-empty(RELEASE_FLAG)"]
 
-[tasks.build]
+[tasks.hwa]
 command = "cargo"
-args = ["build"]
-
-[tasks.objcopy]
-command = "cargo"
-args = ["objcopy", "@@remove-empty(RELEASE_FLAG)", "--", "-O binary", "--strip-all"]
-dependencies = ["build-1"]
-install_crate = { crate_name = "cargo-binutils", binary = "rust-objcopy", test_arg = ["--help"] }
+args = ["objcopy", "@@remove-empty(RELEASE_FLAG)", "--example", "hwa", "--", "-O", "binary", "--strip-all", "rust.kex"]
+#install_crate = { crate_name = "cargo-binutils", binary = "rust-objcopy", test_arg = ["--help"] }
