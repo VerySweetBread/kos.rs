@@ -15,7 +15,7 @@ args = ["clean"]
 command = "cargo"
 args = ["build", "@@remove-empty(RELEASE_FLAG)"]
 
-[tasks.hwa]
+[tasks.example]
 command = "cargo"
-args = ["objcopy", "@@remove-empty(RELEASE_FLAG)", "--example", "hwa", "--", "-O", "binary", "--strip-all", "rust.kex"]
+args = ["objcopy", "@@remove-empty(RELEASE_FLAG)", "--example", "${@}", "--", "-O", "binary", "--strip-all", "${@}.kex"]
 #install_crate = { crate_name = "cargo-binutils", binary = "rust-objcopy", test_arg = ["--help"] }

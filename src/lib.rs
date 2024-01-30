@@ -2,9 +2,11 @@
 
 mod modules;
 mod nanolibc;
-pub mod sys;
 
 pub mod allocation;
+pub mod dll;
+pub mod sys;
+
 pub use modules::*;
 
 #[macro_use]
@@ -26,6 +28,8 @@ macro_rules! throw_new {
 macro_rules! panic {
     ($text:expr) => {
         debug_write(cstr_core::cstr!("Panic!\n" + $text + "\n"));
-        sys::exit();
+        unsafe {
+            sys::exit();
+        }
     };
 }

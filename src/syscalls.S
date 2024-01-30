@@ -17,6 +17,7 @@ section '.text'
     public _alloc
     public _free
     public _get_lang
+    public _load_dll
 
 _exit:
     mov eax, SF_TERMINATE_PROCESS
@@ -118,3 +119,9 @@ _get_lang:
     int 0x40
     ret
 
+_load_dll:
+    mov eax, SF_SYS_MISC
+    mov ebx, SSF_LOAD_DLL
+    mov ecx, [esp + 4 * 1]
+    int 0x40
+    ret

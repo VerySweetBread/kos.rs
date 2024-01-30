@@ -8,7 +8,11 @@ edition = "2018"
 
 [[example]]
 name = "hwa"
-path = "example/hwa.rs"
+path = "examples/hwa.rs"
+
+[[example]]
+name = "con"
+path = "examples/con.rs"
 
 [profile.release]
 opt-level = "z"

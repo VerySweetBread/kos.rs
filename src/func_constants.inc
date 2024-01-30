@@ -18,3 +18,4 @@ SF_SYS_MISC             = 68
     SSF_HEAP_INIT   = 11
     SSF_MEM_ALLOC   = 12
     SSF_MEM_FREE    = 13
+    SSF_LOAD_DLL    = 19

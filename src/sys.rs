@@ -55,4 +55,8 @@ extern "C" {
     // 68.13
     #[link_name = "_free"]
     pub fn free(block: *const u8) -> bool;
+
+    // 68.19
+    #[link_name = "_load_dll"]
+    pub fn load_dll(name: *const u8) -> *const u32;
 }
