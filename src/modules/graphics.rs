@@ -47,6 +47,23 @@ pub fn display_message<'a>(start: Dot, color: Color, text: &'a CStr, bg_color: O
             start.x << 16 | start.y,
             color.as_rgb_val() | BG_FLAG * bg_color.is_some() as u32 | UTF8_FLAG | ASCIIZ_FLAG,
             text.as_ptr() as u32,
+            0,
+            bg_color.unwrap_or(Color(0, 0, 0)).as_rgb_val(),
+        );
+    }
+}
+
+pub fn display_message_str<'a>(start: Dot, color: Color, text: &'a str, bg_color: Option<Color>) {
+    // XX=ABFFCSSS
+    const UTF8_FLAG: u32 = (3 << 4) << 24; // FF
+    const BG_FLAG: u32 = (1 << 6) << 24; // B
+
+    unsafe {
+        sys::display_message(
+            start.x << 16 | start.y,
+            color.as_rgb_val() | BG_FLAG * bg_color.is_some() as u32 | UTF8_FLAG,
+            text.as_ptr() as u32,
+            text.len() as u32,
             bg_color.unwrap_or(Color(0, 0, 0)).as_rgb_val(),
         );
     }

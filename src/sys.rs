@@ -14,7 +14,7 @@ extern "C" {
 
     // 4
     #[link_name = "_display_message"]
-    pub fn display_message(ebx: u32, ecx: u32, edx: u32, edi: u32);
+    pub fn display_message(ebx: u32, ecx: u32, edx: u32, esi: u32, edi: u32);
 
     // 8
     #[link_name = "_define_button"]

@@ -55,7 +55,8 @@ _display_message:
     mov ebx, dword [esp + 4 * 3]
     mov ecx, dword [esp + 4 * 4]
     mov edx, dword [esp + 4 * 5]
-    mov edi, dword [esp + 4 * 6]
+    mov esi, dword [esp + 4 * 6]
+    mov edi, dword [esp + 4 * 7]
     int 0x40
     pop edi esi
     ret
