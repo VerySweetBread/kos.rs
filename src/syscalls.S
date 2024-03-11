@@ -18,6 +18,7 @@ section '.text'
     public _free
     public _get_lang
     public _load_dll
+    public _set_event_mask
 
 _exit:
     mov eax, SF_TERMINATE_PROCESS
@@ -126,3 +127,10 @@ _load_dll:
     mov ecx, [esp + 4 * 1]
     int 0x40
     ret
+
+_set_event_mask:
+    mov eax, SF_SET_EVENTS_MASK
+    mov ebx, [esp + 4 * 1]
+    int 0x40
+    ret
+

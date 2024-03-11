@@ -12,6 +12,7 @@ SF_REDRAW               = 12
 SF_GET_BUTTON           = 17
 SF_SYSTEM_GET           = 26
     SSF_SYS_LANG    = 5
+SF_SET_EVENTS_MASK      = 40
 SF_BOARD                = 63
     SSF_DEBUG_WRITE = 1
 SF_SYS_MISC             = 68

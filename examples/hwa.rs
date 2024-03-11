@@ -94,7 +94,9 @@ fn button_handler(c: &mut usize) {
 fn kol_main() {
     let mut c = 0;
 
-    while let Some(ev) = fetch_event() {
+    while let Some(ev) =
+        fetch_event((Event::Redraw as u32) | (Event::KeyPress as u32) | (Event::BtnPress as u32))
+    {
         match ev {
             Event::Redraw => draw_window(c),
             Event::KeyPress => drop(fetch_key()),

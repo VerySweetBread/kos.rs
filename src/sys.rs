@@ -40,6 +40,10 @@ extern "C" {
     #[link_name = "_get_lang"]
     pub fn get_lang() -> u32;
 
+    // 40
+    #[link_name = "_set_event_mask"]
+    pub fn set_event_mask(mask: u32) -> u32;
+
     // 63.1
     #[link_name = "_debug_write"]
     pub fn _debug_write(cl: u8);
