@@ -64,3 +64,10 @@ extern "C" {
     #[link_name = "_load_dll"]
     pub fn load_dll(name: *const u8) -> *const u32;
 }
+
+// dll.inc
+#[link(name = "syscalls")]
+extern "stdcall" {
+    #[link_name = "dll.Init"]
+    pub fn dllInit(init_function: fn());
+}

@@ -1,6 +1,9 @@
 format ELF
 
-include "src/func_constants.inc"
+include "src/include/macros.inc"
+include "src/include/proc32.inc"
+include "src/include/dll.inc"
+include "src/include/func_constants.inc"
 
 section '.text'
     public _exit
@@ -19,6 +22,8 @@ section '.text'
     public _get_lang
     public _load_dll
     public _set_event_mask
+
+    public dll.Init
 
 _exit:
     mov eax, SF_TERMINATE_PROCESS

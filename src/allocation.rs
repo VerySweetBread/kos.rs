@@ -170,13 +170,15 @@ unsafe impl alloc::alloc::GlobalAlloc for GlobalAlloc {
             return null_mut();
         }
 
-        init();
-        malloc(layout.size())
+        // init();
+        // malloc(layout.size())
+        sys::alloc(layout.size()) as *mut u8
     }
 
     unsafe fn dealloc(&self, ptr: *mut u8, _: Layout) {
         // free keeps track of layout presumably????
-        free(ptr)
+        // free(ptr)
+        sys::free(ptr);
     }
 }
 
