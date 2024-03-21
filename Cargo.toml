@@ -19,6 +19,6 @@ opt-level = "z"
 lto = "thin"
 
 [dependencies]
-cstr_core = { version = "0.2.4", default-features = false, features = ["nightly"] }
+cstr_core = { version = "0.2.6", default-features = false, features = ["nightly"] }
 
 [build-dependencies]
