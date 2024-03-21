@@ -2,7 +2,7 @@
 name = "kos"
 version = "0.1.0"
 authors = ["Kitsu <mail@kitsu.me>", "Sweetbread"]
-edition = "2018"
+edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -19,6 +19,6 @@ opt-level = "z"
 lto = "thin"
 
 [dependencies]
-cstr_core = { version = "0.2.4", default-features = false, features = ["nightly"] }
+cstr_core = { version = "0.2.6", default-features = false, features = ["nightly"] }
 
 [build-dependencies]
