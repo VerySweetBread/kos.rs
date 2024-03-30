@@ -14,6 +14,10 @@ path = "examples/hwa.rs"
 name = "con"
 path = "examples/con.rs"
 
+[[example]]
+name = "dark"
+path = "examples/dark.rs"
+
 [profile.release]
 opt-level = "z"
 lto = "thin"

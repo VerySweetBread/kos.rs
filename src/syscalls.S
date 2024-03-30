@@ -7,6 +7,7 @@ section '.text'
     public _start_window_draw
     public _end_window_draw
     public _define_window
+    public _put_pixel
     public _display_message
     public _wait_event
     public _pressed_key
@@ -48,6 +49,14 @@ _define_window:
     int 0x40
     pop esi
     pop edi
+    ret
+
+_put_pixel:
+    mov eax, SF_PUT_PIXEL
+    mov ebx, dword [esp + 4 * 1]
+    mov ecx, dword [esp + 4 * 2]
+    mov edx, dword [esp + 4 * 3]
+    int 0x40
     ret
 
 _display_message:

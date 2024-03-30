@@ -8,6 +8,10 @@ extern "C" {
     #[link_name = "_define_window"]
     pub fn define_window(ebx: u32, ecx: u32, edx: u32, esi: u32, edi: u32);
 
+    // 1
+    #[link_name = "_put_pixel"]
+    pub fn put_pixel(ebx: u32, ecx: u32, edx: u32);
+
     // 2
     #[link_name = "_pressed_key"]
     pub fn pressed_key() -> u32;

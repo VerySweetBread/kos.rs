@@ -39,6 +39,15 @@ pub fn define_window(start: Dot, size: Size, params: WindowParams<'_>) {
     }
 }
 
+pub fn put_pixel(pos: Dot, color: Option<Color>) {
+    let color: u32 = color.unwrap_or(Color::rgb(255, 255, 255)).as_rgb_val();
+    unsafe { sys::put_pixel(pos.x, pos.y, color) }
+}
+
+pub fn invert_pixel(pos: Dot) {
+    unsafe { sys::put_pixel(pos.x, pos.y, 1 << 24) }
+}
+
 pub fn define_button(
     start: Dot,
     size: Size,
