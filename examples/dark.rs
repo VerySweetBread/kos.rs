@@ -1,8 +1,6 @@
 #![no_std]
 #![no_main]
 
-use cstr_core::{cstr, CStr};
-
 use kos::{
     graphics::{display_message, Color, Dot, Size},
     input::fetch_key,
@@ -13,14 +11,14 @@ use kos::{
     },
 };
 
-const HEADER: &CStr = cstr!("Dark Mode Demo");
-const TEXT: [&CStr; 6] = [
-    cstr!("Lorem ipsum dolor sit amet,"),
-    cstr!("semper et rutrum placerat,"),
-    cstr!("Integer sed diam commodo quam varius"),
-    cstr!("Sed finibus urna sit amet felis"),
-    cstr!("vestibulum elementum. Maecenas at feugiat lacus"),
-    cstr!("tristique et sit amet tortor."),
+const HEADER: &'static CStr = c"Dark Mode Demo";
+const TEXT: [&'static CStr; 6] = [
+    c"Lorem ipsum dolor sit amet,",
+    c"semper et rutrum placerat,",
+    c"Integer sed diam commodo quam varius",
+    c"Sed finibus urna sit amet felis",
+    c"vestibulum elementum. Maecenas at feugiat lacus",
+    c"tristique et sit amet tortor.",
 ];
 const BTN: u32 = 42;
 const WINDOW_SIZE: Size = Size {
@@ -66,9 +64,9 @@ fn draw_window(invert: bool) {
         Dot { x: 20, y: 310 },
         Color::rgb(255, 255, 255),
         if invert {
-            cstr!("Light mode")
+            c"Light mode"
         } else {
-            cstr!("Dark mode")
+            c"Dark mode"
         },
         None,
     );

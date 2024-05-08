@@ -1,5 +1,5 @@
 use crate::sys;
-use cstr_core::CStr;
+use core::ffi::CStr;
 
 mod console;
 pub use console::Console;

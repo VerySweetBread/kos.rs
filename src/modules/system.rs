@@ -1,7 +1,7 @@
 use crate::sys;
 use crate::throw_new;
 use alloc::string::String;
-use cstr_core::CStr;
+use core::ffi::CStr;
 
 trait Debuggable {
     fn data_iter(self) -> impl Iterator<Item = u8>;

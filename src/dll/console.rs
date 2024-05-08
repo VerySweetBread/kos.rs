@@ -1,7 +1,6 @@
 use crate::dll::DLL;
+use core::ffi::CStr;
 use core::mem::transmute;
-use cstr_core::cstr;
-use cstr_core::CStr;
 
 pub struct Console {
     con_init: extern "stdcall" fn(u32, u32, u32, u32, *const u8),
@@ -11,16 +10,14 @@ pub struct Console {
 
 impl Console {
     pub fn import(path: Option<&CStr>) -> Result<Self, &str> {
-        let lib = DLL::load_dll(path.unwrap_or(cstr!("/sys/lib/console.obj")));
+        let lib = DLL::load_dll(path.unwrap_or(c"/sys/lib/console.obj"));
         match lib {
             Err(e) => return Err(e),
             Ok(dll) => unsafe {
                 Ok(Console {
-                    con_init: transmute(dll.get_func(cstr!("con_init")).ok().unwrap()),
-                    con_write_string: transmute(
-                        dll.get_func(cstr!("con_write_string")).ok().unwrap(),
-                    ),
-                    con_exit: transmute(dll.get_func(cstr!("con_exit")).ok().unwrap()),
+                    con_init: transmute(dll.get_func(c"con_init").ok().unwrap()),
+                    con_write_string: transmute(dll.get_func(c"con_write_string").ok().unwrap()),
+                    con_exit: transmute(dll.get_func(c"con_exit").ok().unwrap()),
                 })
             },
         }

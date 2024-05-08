@@ -1,5 +1,5 @@
 use crate::sys;
-use cstr_core::CStr;
+use core::ffi::CStr;
 
 #[derive(Clone, Copy)]
 pub struct Color(u8, u8, u8);

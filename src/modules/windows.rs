@@ -2,7 +2,8 @@ use crate::graphics::{Color, Dot, Size};
 use crate::sys;
 use crate::system::debug_write;
 use crate::throw_new;
-use cstr_core::{cstr, CStr};
+use alloc::ffi::CString;
+use core::ffi::CStr;
 
 #[repr(u32)]
 pub enum WindowKind {
@@ -16,12 +17,12 @@ pub enum WindowKind {
 pub struct WindowParams<'a> {
     pub color: Color,
     pub kind: WindowKind,
-    pub title: Option<&'a cstr_core::CStr>,
+    pub title: Option<&'a CStr>,
 }
 
 pub const CLOSE_BUTTON: u32 = 1;
 
-pub fn define_window(start: Dot, size: Size, params: WindowParams<'_>) {
+pub fn define_window(start: Dot, size: Size, params: WindowParams) {
     const RELATIVE_FLAG: u32 = 0x20;
 
     unsafe {
@@ -60,14 +61,12 @@ pub fn define_button(
         crate::graphics::display_message(
             Dot { x: 10, y: 200 },
             Color::rgb(255, 0, 0),
-            CStr::from_bytes_with_nul(
-                format!(
-                    "x:{:?} y:{:?} w:{:?} h:{:?}\n\0",
-                    start.x, start.y, size.width, size.height
-                )
-                .as_bytes(),
-            )
-            .unwrap_or(cstr!("String error")),
+            CString::new(format!(
+                "x:{:?} y:{:?} w:{:?} h:{:?}\n",
+                start.x, start.y, size.width, size.height
+            ))
+            .expect("CString error")
+            .as_c_str(),
             None,
         );
         throw_new!(format!(

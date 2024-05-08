@@ -21,8 +21,3 @@ path = "examples/dark.rs"
 [profile.release]
 opt-level = "z"
 lto = "thin"
-
-[dependencies]
-cstr_core = { version = "0.2.6", default-features = false, features = ["nightly"] }
-
-[build-dependencies]

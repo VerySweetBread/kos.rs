@@ -1,8 +1,8 @@
 #![no_std]
 #![no_main]
 
-use cstr_core::{cstr, CStr};
-
+use alloc::ffi::CString;
+use core::ffi::CStr;
 use kos::{
     graphics::{display_message, Color, Dot, Size},
     input::fetch_key,
@@ -14,8 +14,8 @@ use kos::{
     },
 };
 
-const HEADER: &CStr = cstr!("Hey Kolibri");
-const MSG: &CStr = cstr!("Hello from Rust!");
+const HEADER: &CStr = c"Hey Kolibri";
+const MSG: &CStr = c"Hello from Rust!";
 const BTN: u32 = 42;
 
 #[macro_use]
@@ -45,16 +45,18 @@ fn draw_window(c: usize) {
     );
 
     let btn_str = match get_lang() {
-        Lang::German => format!("Taste gedrückt: {} mal\0", c),
-        Lang::Russian => format!("Кнопка нажата: {} раз\0", c),
-        Lang::French => format!("Button enfoncé : {} fois\0", c),
-        _ => format!("Button pressed: {} times\0", c),
+        Lang::German => format!("Taste gedrückt: {} mal", c),
+        Lang::Russian => format!("Кнопка нажата: {} раз", c),
+        Lang::French => format!("Button enfoncé : {} fois", c),
+        _ => format!("Button pressed: {} times", c),
     };
 
     display_message(
         Dot { x: 10, y: 30 },
         Color::rgb(0, 0, 0),
-        CStr::from_bytes_with_nul(btn_str.as_bytes()).unwrap_or(cstr!("String error")),
+        CString::new(btn_str.as_bytes())
+            .expect("CString error")
+            .as_c_str(),
         None,
     );
 
