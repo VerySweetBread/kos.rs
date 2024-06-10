@@ -31,3 +31,12 @@ pub unsafe extern "C" fn memcmp(s1: *mut u8, s2: *const u8, n: usize) -> i32 {
 
     0
 }
+
+#[no_mangle]
+pub unsafe extern "C" fn strlen(str: *mut u8) -> usize {
+    let mut len = 0usize;
+    loop {
+        if *str.add(len) == 0 { return len; }
+        len += 1;
+    }
+}
